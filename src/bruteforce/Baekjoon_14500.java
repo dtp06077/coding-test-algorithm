@@ -8,6 +8,7 @@ public class Baekjoon_14500 {
     static int[][] paper;
     static int[] dArr1,dArr2,dArr3,dArr4;
     static int max=0;
+
     static void findMax(){
         for(int i=0;i<5;i++){
             switch (i){
@@ -19,6 +20,7 @@ public class Baekjoon_14500 {
             }
         }
     }
+
     static int addNum(int row,int col,int[] dx, int[] dy){
         int addNum=0;
         int nCol,nRow;
@@ -30,6 +32,7 @@ public class Baekjoon_14500 {
         }
         return addNum;
     }
+
     static void caseZero(){
         dArr1=new int[]{0,1,2,3};
         dArr2=new int[4];
@@ -38,17 +41,19 @@ public class Baekjoon_14500 {
         for(int i=0;i<N;i++){
             for(int j=0;j<M;j++){
                 for(int k=0;k<4;k++){
-                    int addNum;
+                    int addNum=0;
                     switch (k){
-                        case 0: addNum=addNum(i,j,dArr1,dArr2); max=(max>addNum)?max:addNum; break;
-                        case 1: addNum=addNum(i,j,dArr2,dArr1); max=(max>addNum)?max:addNum; break;
-                        case 2: addNum=addNum(i,j,dArr3,dArr2); max=(max>addNum)?max:addNum; break;
-                        case 3: addNum=addNum(i,j,dArr2,dArr3); max=(max>addNum)?max:addNum; break;
+                        case 0: addNum=addNum(i,j,dArr1,dArr2); break;
+                        case 1: addNum=addNum(i,j,dArr2,dArr1); break;
+                        case 2: addNum=addNum(i,j,dArr3,dArr2); break;
+                        case 3: addNum=addNum(i,j,dArr2,dArr3); break;
                     }
+                    max=(max>addNum)?max:addNum;
                 }
             }
         }
     }
+
     static void caseOne(){
         dArr1=new int[]{0,1,0,1};
         dArr2=new int[]{0,0,1,1};
@@ -60,6 +65,7 @@ public class Baekjoon_14500 {
             }
         }
     }
+
     static void caseTwo(){
         dArr1=new int[]{0,0,0,1};
         dArr2=new int[]{0,1,2,2};
@@ -69,21 +75,23 @@ public class Baekjoon_14500 {
         for(int i=0;i<N;i++){
             for(int j=0;j<M;j++){
                 for(int k=0;k<8;k++){
-                    int addNum;
+                    int addNum=0;
                     switch (k){
-                        case 0: addNum=addNum(i,j,dArr1,dArr2); max=(max>addNum)?max:addNum; break;
-                        case 1: addNum=addNum(i,j,dArr3,dArr2); max=(max>addNum)?max:addNum; break;
-                        case 2: addNum=addNum(i,j,dArr4,dArr1); max=(max>addNum)?max:addNum; break;
-                        case 3: addNum=addNum(i,j,dArr4,dArr3); max=(max>addNum)?max:addNum; break;
-                        case 4: addNum=addNum(i,j,dArr3,dArr4); max=(max>addNum)?max:addNum; break;
-                        case 5: addNum=addNum(i,j,dArr1,dArr4); max=(max>addNum)?max:addNum; break;
-                        case 6: addNum=addNum(i,j,dArr2,dArr3); max=(max>addNum)?max:addNum; break;
-                        case 7: addNum=addNum(i,j,dArr2,dArr1); max=(max>addNum)?max:addNum; break;
+                        case 0: addNum=addNum(i,j,dArr1,dArr2); break;
+                        case 1: addNum=addNum(i,j,dArr3,dArr2); break;
+                        case 2: addNum=addNum(i,j,dArr4,dArr1); break;
+                        case 3: addNum=addNum(i,j,dArr4,dArr3); break;
+                        case 4: addNum=addNum(i,j,dArr3,dArr4); break;
+                        case 5: addNum=addNum(i,j,dArr1,dArr4); break;
+                        case 6: addNum=addNum(i,j,dArr2,dArr3); break;
+                        case 7: addNum=addNum(i,j,dArr2,dArr1); break;
                     }
+                    max=(max>addNum)?max:addNum;
                 }
             }
         }
     }
+
     static void caseThree(){
         dArr1=new int[]{0,0,1,1};
         dArr2=new int[]{0,1,1,2};
@@ -93,21 +101,23 @@ public class Baekjoon_14500 {
         for(int i=0;i<N;i++){
             for(int j=0;j<M;j++){
                 for(int k=0;k<8;k++){
-                    int addNum;
+                    int addNum=0;
                     switch (k){
-                        case 0: addNum=addNum(i,j,dArr1,dArr2); max=(max>addNum)?max:addNum; break;
-                        case 1: addNum=addNum(i,j,dArr3,dArr2); max=(max>addNum)?max:addNum; break;
-                        case 2: addNum=addNum(i,j,dArr4,dArr1); max=(max>addNum)?max:addNum; break;
-                        case 3: addNum=addNum(i,j,dArr4,dArr3); max=(max>addNum)?max:addNum; break;
-                        case 4: addNum=addNum(i,j,dArr3,dArr4); max=(max>addNum)?max:addNum; break;
-                        case 5: addNum=addNum(i,j,dArr1,dArr4); max=(max>addNum)?max:addNum; break;
-                        case 6: addNum=addNum(i,j,dArr2,dArr3); max=(max>addNum)?max:addNum; break;
-                        case 7: addNum=addNum(i,j,dArr2,dArr1); max=(max>addNum)?max:addNum; break;
+                        case 0: addNum=addNum(i,j,dArr1,dArr2); break;
+                        case 1: addNum=addNum(i,j,dArr3,dArr2); break;
+                        case 2: addNum=addNum(i,j,dArr4,dArr1); break;
+                        case 3: addNum=addNum(i,j,dArr4,dArr3); break;
+                        case 4: addNum=addNum(i,j,dArr3,dArr4); break;
+                        case 5: addNum=addNum(i,j,dArr1,dArr4); break;
+                        case 6: addNum=addNum(i,j,dArr2,dArr3); break;
+                        case 7: addNum=addNum(i,j,dArr2,dArr1); break;
                     }
+                    max=(max>addNum)?max:addNum;
                 }
             }
         }
     }
+
     static void caseFour() {
         dArr1 = new int[]{0, -1, 1, 0};
         dArr2 = new int[]{0, 0, 0, 1};
@@ -116,17 +126,19 @@ public class Baekjoon_14500 {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 for (int k = 0; k < 4; k++) {
-                    int addNum;
+                    int addNum=0;
                     switch (k) {
-                        case 0: addNum=addNum(i,j,dArr1,dArr2); max=(max>addNum)?max:addNum; break;
-                        case 1: addNum=addNum(i,j,dArr3,dArr1); max=(max>addNum)?max:addNum; break;
-                        case 2: addNum=addNum(i,j,dArr1,dArr3); max=(max>addNum)?max:addNum; break;
-                        case 3: addNum=addNum(i,j,dArr2,dArr1); max=(max>addNum)?max:addNum; break;
+                        case 0: addNum=addNum(i,j,dArr1,dArr2); break;
+                        case 1: addNum=addNum(i,j,dArr3,dArr1); break;
+                        case 2: addNum=addNum(i,j,dArr1,dArr3); break;
+                        case 3: addNum=addNum(i,j,dArr2,dArr1); break;
                     }
+                    max=(max>addNum)?max:addNum;
                 }
             }
         }
     }
+
     public static void main(String[] args) throws IOException{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st=new StringTokenizer(br.readLine());
