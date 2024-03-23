@@ -1,99 +1,51 @@
 package dfs;
 
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class Baekjoon_14888 {
-    static int N,M;
-    static int[][] map;
+    static int[] arr;
+    static int[] ope=new int[4];
+    static int N;
+    static int MAX=Integer.MIN_VALUE;
+    static int MIN=Integer.MAX_VALUE;
 
-    static int maxArea=0;
-    static Queue<Node> queue=new LinkedList<>();
-    static boolean[][] visited;
-    static int[] dx={1,0,-1,0};
-    static int[] dy={0,-1,0,1};
-    static class Node{
-        int x,y;
-        Node(int x,int y){
-            this.x=x;
-            this.y=y;
-        }
-    }
-    static void dfs(int wallCount){
-        if(wallCount==3){
-            int cnt=infection();
-            maxArea=(maxArea>cnt)?maxArea:cnt;
+    public static void dfs(int num,int index){
+        if(index==N){
+            MAX=(MAX<num)?num:MAX;
+            MIN=(MIN>num)?num:MIN;
             return;
         }
+        for(int i=0;i<4;i++){
+            if(ope[i]>0){
+                ope[i]--;
 
-        for(int i=0;i<N;i++){
-            for(int j=0;j<M;j++) {
-                if(map[i][j]==0){
-                    map[i][j]=1;
-                    dfs(wallCount+1);
-                    map[i][j]=0;
+                switch(i){
+                    case 0:dfs(num+arr[index],index+1); break;
+                    case 1:dfs(num-arr[index],index+1); break;
+                    case 2:dfs(num*arr[index],index+1); break;
+                    case 3:dfs(num/arr[index],index+1); break;
                 }
-            }
-        }
-    }
-    static int infection(){
-        int count=0;
-        int[][] copyMap=new int[N][M];
-        visited=new boolean[N][M];
-
-        for(int i=0;i<N;i++){
-            for(int j=0;j<M;j++){
-                copyMap[i][j]=map[i][j];
-            }
-        }
-        for(int i=0;i<N;i++){
-            for(int j=0;j<M;j++){
-                if(!visited[i][j]&&copyMap[i][j]==2){
-                    visited[i][j]=true;
-                    queue.add(new Node(j,i));
-                    bfs(copyMap);
-                }
-            }
-        }
-        for(int i=0;i<N;i++){
-            for(int j=0;j<M;j++){
-                if(copyMap[i][j]==0){
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
-    static void bfs(int[][] copyMap){
-        while(!queue.isEmpty()){
-            Node node=queue.poll();
-            int x=node.x;
-            int y=node.y;
-            for(int i=0;i<4;i++){
-                int nx=dx[i]+x;
-                int ny=dy[i]+y;
-                if(nx<0||ny<0||nx>=M||ny>=N) continue;
-                if(visited[ny][nx]||copyMap[ny][nx]!=0) continue;
-                copyMap[ny][nx]=2;
-                visited[ny][nx]=true;
-                queue.add(new Node(nx,ny));
+                ope[i]++;
             }
         }
     }
     public static void main(String[] args) throws IOException{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st=new StringTokenizer(br.readLine());
-        N=Integer.parseInt(st.nextToken());
-        M=Integer.parseInt(st.nextToken());
-        map=new int[N][M];
+        N=Integer.parseInt(br.readLine());
+        arr=new int[N];
 
+        StringTokenizer st1=new StringTokenizer(br.readLine());
         for(int i=0;i<N;i++){
-            st=new StringTokenizer(br.readLine());
-            for(int j=0;j<M;j++){
-                map[i][j]=Integer.parseInt(st.nextToken());
-            }
+            arr[i]=Integer.parseInt(st1.nextToken());
         }
-        dfs(0);
-        System.out.println(maxArea);
+
+        StringTokenizer st2=new StringTokenizer(br.readLine());
+        for(int i=0;i<4;i++){
+            ope[i]=Integer.parseInt(st2.nextToken());
+        }
+        dfs(arr[0],1);
+        System.out.println(MAX);
+        System.out.println(MIN);
     }
 }
