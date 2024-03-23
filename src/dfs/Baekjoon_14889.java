@@ -1,99 +1,63 @@
 package dfs;
 
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class Baekjoon_14889 {
-    static int N,M;
-    static int[][] map;
+    static int N;
+    static int[][] team;
+    static boolean[] visited;
+    static int MIN=Integer.MAX_VALUE;
 
-    static int maxArea=0;
-    static Queue<Node> queue=new LinkedList<>();
-    static boolean[][] visited;
-    static int[] dx={1,0,-1,0};
-    static int[] dy={0,-1,0,1};
-    static class Node{
-        int x,y;
-        Node(int x,int y){
-            this.x=x;
-            this.y=y;
-        }
-    }
-    static void dfs(int wallCount){
-        if(wallCount==3){
-            int cnt=infection();
-            maxArea=(maxArea>cnt)?maxArea:cnt;
+    public static void dfs(int index, int depth){
+        if(depth==N/2){
+            output();
             return;
         }
-
-        for(int i=0;i<N;i++){
-            for(int j=0;j<M;j++) {
-                if(map[i][j]==0){
-                    map[i][j]=1;
-                    dfs(wallCount+1);
-                    map[i][j]=0;
-                }
-            }
+        for(int i=index;i<N;i++){
+            visited[i]=true;
+            dfs(i+1, depth+1);
+            visited[i]=false;
         }
     }
-    static int infection(){
-        int count=0;
-        int[][] copyMap=new int[N][M];
-        visited=new boolean[N][M];
 
-        for(int i=0;i<N;i++){
-            for(int j=0;j<M;j++){
-                copyMap[i][j]=map[i][j];
-            }
-        }
-        for(int i=0;i<N;i++){
-            for(int j=0;j<M;j++){
-                if(!visited[i][j]&&copyMap[i][j]==2){
-                    visited[i][j]=true;
-                    queue.add(new Node(j,i));
-                    bfs(copyMap);
+    public static void output(){
+        int start=0;
+        int link=0;
+        for(int i=0;i<N-1;i++){
+            for(int j=i+1;j<N;j++){
+                if(visited[i]==true&&visited[j]==true){
+                    start+=team[i][j];
+                    start+=team[j][i];
+                }
+                else if(visited[i]==false&&visited[j]==false){
+                    link+=team[i][j];
+                    link+=team[j][i];
                 }
             }
         }
-        for(int i=0;i<N;i++){
-            for(int j=0;j<M;j++){
-                if(copyMap[i][j]==0){
-                    count++;
-                }
-            }
+        int num=Math.abs(start-link);
+
+        if(num==0){
+            System.out.print(num);
+            System.exit(0);
         }
-        return count;
-    }
-    static void bfs(int[][] copyMap){
-        while(!queue.isEmpty()){
-            Node node=queue.poll();
-            int x=node.x;
-            int y=node.y;
-            for(int i=0;i<4;i++){
-                int nx=dx[i]+x;
-                int ny=dy[i]+y;
-                if(nx<0||ny<0||nx>=M||ny>=N) continue;
-                if(visited[ny][nx]||copyMap[ny][nx]!=0) continue;
-                copyMap[ny][nx]=2;
-                visited[ny][nx]=true;
-                queue.add(new Node(nx,ny));
-            }
-        }
+
+        MIN=Math.min(MIN,num);
     }
     public static void main(String[] args) throws IOException{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st=new StringTokenizer(br.readLine());
-        N=Integer.parseInt(st.nextToken());
-        M=Integer.parseInt(st.nextToken());
-        map=new int[N][M];
+        N=Integer.parseInt(br.readLine());
+        team=new int[N][N];
+        visited=new boolean[N];
 
         for(int i=0;i<N;i++){
-            st=new StringTokenizer(br.readLine());
-            for(int j=0;j<M;j++){
-                map[i][j]=Integer.parseInt(st.nextToken());
+            StringTokenizer st=new StringTokenizer(br.readLine());
+            for(int j=0;j<N;j++){
+                team[i][j]=Integer.parseInt(st.nextToken());
             }
         }
-        dfs(0);
-        System.out.println(maxArea);
+        dfs(0,0);
+        System.out.print(MIN);
     }
 }
