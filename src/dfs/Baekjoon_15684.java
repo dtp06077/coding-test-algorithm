@@ -8,13 +8,13 @@ public class Baekjoon_15684 {
     static boolean[][] ladder;
     //static Queue<Node> queue=new LinkedList<>();
     static int minLine=0;
-    static class Node{
-        int x,y;
-        Node(int x,int y){
-            this.x=x;
-            this.y=y;
-        }
-    }
+//    static class Node{
+//        int x,y;
+//        Node(int x,int y){
+//            this.x=x;
+//            this.y=y;
+//        }
+//    }
     static int ladderGame(){
 
         while(minLine<4){
