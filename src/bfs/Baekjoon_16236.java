@@ -34,9 +34,9 @@ public class Baekjoon_16236 {
             if(!isPossible) return time;
             //시작 노드 방문
             isVisited[sharkY][sharkX]=true;
-            //큐에 시작 노드를 넣고 dfs 탐색
+            //큐에 시작 노드를 넣고 bfs 탐색
             queue.add(new Node(sharkX,sharkY,0));
-            dfs(sharkSize);
+            bfs(sharkSize);
 
             //리스트에 값이 존재하면
             if(!arrayList.isEmpty()){
@@ -79,7 +79,7 @@ public class Baekjoon_16236 {
             }
         }
     }
-    static void dfs(int sharkSize){
+    static void bfs(int sharkSize){
         int minDist=500;
 
         while(!queue.isEmpty()){
