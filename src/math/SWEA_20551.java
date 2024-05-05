@@ -22,6 +22,7 @@ public class SWEA_20551 {
 
             else {
                 int count = 0;
+
                 if(B>=C) {
                     count+=B-(C-1);
                     B=C-1;
