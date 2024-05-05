@@ -26,6 +26,7 @@ public class SWEA_1859 {
                     maxIndex = i;
                 }
             }
+
             int startIndex=0;
             while(true) {
                 for(int i=startIndex;i<maxIndex;i++) {
