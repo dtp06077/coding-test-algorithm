@@ -14,7 +14,7 @@ public class SWEA_18662 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int T = Integer.parseInt(br.readLine());
         int index = 0;
-        double answer[] = new double[T];
+        double[] answer = new double[T];
 
         while(index<T) {
             StringTokenizer st = new StringTokenizer(br.readLine());
