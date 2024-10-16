@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 /**
  * 가장 많이 받은 선물
  */
-public class programmers_KAKAO_WINTER_INTERNSHIP {
+public class Programmers_KAKAO_WINTER_INTERNSHIP {
     static class Info {
         int give;
         int receive;
